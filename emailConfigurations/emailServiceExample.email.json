@@ -1,0 +1,44 @@
+{
+    "ServiceName": "EmailServiceExample",
+    "CredentialsConfig": {
+        "secretName": "secretName",
+        "fromDirection": "fromDirection"
+    },
+    "dayOfFirstCommunication": "22/08/2024",
+    "dueDate": "22/09/2024",
+    "databaseConfig": {
+        "databaseName": "FireStore",
+        "collectionName": "collectionName"
+    },
+    "emailsConfig": {
+        "submittedField": "submittedAt",
+        "firstEmailConfig": {
+            "template": {
+                "templateName": "directionToTemplate",
+                "templatePlaceHolders": {
+                    "name": "name",
+                    "dueDate": "22/09/2024"
+                }
+            },
+            "sendDate": "22/08/2024",
+            "databaseField": "firstEmailSent"
+        },
+        "chasersConfig": {
+            "template": {
+                "name": "name",
+                "dueDate": "22/09/2024"
+            },
+            "numberOfChasers": 3,
+            "intervalBetweenChasers": 7,
+            "databaseField": "chaser${numberOfChaser}Sent"
+        },
+        "finalEmailConfig": {
+            "template": {
+                "name": "name",
+                "dueDate": "22/09/2024"
+            },
+            "daysBeforeDueDate": "22/09/2024",
+            "databaseField": "finalEmailSent"
+        }
+    }
+}
