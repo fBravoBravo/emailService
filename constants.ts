@@ -1,5 +1,6 @@
 import admin from "firebase-admin";
 import * as _firestore from "@google-cloud/firestore";
+import "dotenv/config";
 
 export const todayDate = new Date();
 export const todayObject = {
@@ -10,7 +11,7 @@ export const todayObject = {
   day: todayDate.getDate(),
 };
 
-const serviceAccountkeyString = env["FIRESTORE_SERVICE_ACCOUNT_KEY"];
+const serviceAccountkeyString = process.env.FIRESTORE_SERVICE_ACCOUNT_KEY;
 const serviceAccountkey = JSON.parse(serviceAccountkeyString as string);
 
 admin.initializeApp({

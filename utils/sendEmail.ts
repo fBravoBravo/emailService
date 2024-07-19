@@ -1,5 +1,4 @@
-import nodemailer from "npm:nodemailer";
-import { env } from "../constants.js";
+import nodemailer from "nodemailer";
 
 export async function sendEmail(
   recipient: string,
@@ -9,8 +8,8 @@ export async function sendEmail(
   const options = {
     service: "Gmail",
     auth: {
-      user: env["GOOGLE_EMAIL"],
-      pass: env["GOOGLE_PASSWORD"],
+      user: process.env.GOOGLE_EMAIL,
+      pass: process.env.GOOGLE_PASSWORD,
     },
   };
 
