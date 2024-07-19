@@ -1,12 +1,13 @@
 import { TemplateConf } from "../../types";
 import { replacePlaceholders } from "./replacePlaceHolder";
+import { readFileSync } from "fs";
 
 export function generateSubjectAndBody(
   templateConfig: TemplateConf,
   subject: string,
   data: { [key: string]: string },
 ) {
-  const bodyTemplate = Deno.readTextFileSync(templateConfig.templatePath);
+  const bodyTemplate = readFileSync(templateConfig.templatePath).toString();
   const dataKeys = Object.keys(data);
 
   const placeHolders: string[][] = [];
