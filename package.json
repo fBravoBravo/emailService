@@ -1,25 +1,20 @@
 {
-  "name": "email-service",
-  "description": "BPa email service to handle automatic emails",
-  "relatedJiraIssues": ["BPA-1915", "BPA-1968"],
-  "contributors": ["francisco.bravo@ebury.com"],
-  "main": "dist/index.js",
-  "platform": "cloud-run",
-  "runtime": "deno",
-  "status": "active",
+  "name": "emailservice",
+  "version": "1.0.0",
+  "description": "A backend for the australian Ts & Cs solution to communicate and process data from the frontend.",
+  "main": "index.js",
+  "devDependencies": {},
   "scripts": {
-    "ts-check": "deno check ./src/index.ts",
-    "develop": "deno run --allow-all --watch ./src/index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "stages": {
-    "staging": {
-      "url": "https://console.cloud.google.com/run/detail/europe-west1/self-declaration-t-and-cs-api-staging",
-      "endpointUrl": "https://self-declaration-t-and-cs-api-staging-cehm3wmena-ew.a.run.app"
-    },
-    "production": {
-      "url": "https://console.cloud.google.com/run/detail/europe-west1/self-declaration-t-and-cs-api-production",
-      "endpointUrl": "https://self-declaration-t-and-cs-api-production-cehm3wmena-ew.a.run.app"
-    }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fBravoBravo/emailService.git"
   },
-  "relatedProcesses": ["self-declaration-t-and-cs-interface"]
+  "author": "Francisco Bravo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fBravoBravo/emailService/issues"
+  },
+  "homepage": "https://github.com/fBravoBravo/emailService#readme"
 }
