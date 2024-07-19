@@ -1,5 +1,5 @@
 import { ConfigJSON } from "../types.ts";
-import { db } from "./constants.ts";
+import { db } from "../constants.js";
 
 export async function loopProcessor(
   retriever: (

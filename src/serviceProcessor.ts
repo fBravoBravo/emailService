@@ -1,5 +1,5 @@
 import { ConfigJSON, configJson } from "../types.ts";
-import { todayDate, todayObject } from "./constants.ts";
+import { todayDate, todayObject } from "../constants.js";
 import { handleChaserEmail } from "./handlers/chasers.ts";
 import { loopProcessor } from "./loopProcesser.ts";
 import { retrievingFromFirestoreChaser } from "./retrievers/chasersRetriever.ts";

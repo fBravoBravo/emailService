@@ -1,5 +1,5 @@
 import nodemailer from "npm:nodemailer";
-import { env } from "../src/constants.ts";
+import { env } from "../constants.js";
 
 export async function sendEmail(
   recipient: string,
