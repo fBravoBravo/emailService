@@ -1,2 +1,4 @@
 appscript-296515-firebase-adminsdk-e9ksw-539ce686c1.json
 .env
+node_modules/
+build/
