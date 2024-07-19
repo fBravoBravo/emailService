@@ -1,4 +1,4 @@
-import { ConfigJSON } from "../../types.ts";
+import { ConfigJSON } from "../../types";
 
 export async function retrievingFromFirestoreChaser(
   emailConfig: ConfigJSON,
@@ -37,7 +37,7 @@ export async function retrievingFromFirestoreChaser(
       FirebaseFirestore.DocumentData,
       FirebaseFirestore.DocumentData
     >;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(
       "Error retrieving from firestore for the chasers: " + error.message,
     );

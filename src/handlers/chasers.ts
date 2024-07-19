@@ -1,8 +1,7 @@
-import admin from "npm:firebase-admin";
-import { sendEmail } from "../../utils/sendEmail.ts";
-import { replacePlaceholders } from "../templateEngine/replacePlaceHolder.ts";
-import { ConfigJSON } from "../../types.ts";
-import { generateSubjectAndBody } from "../templateEngine/generateSubjectAndBody.ts";
+import admin from "firebase-admin";
+import { sendEmail } from "../../utils/sendEmail";
+import { ConfigJSON } from "../../types";
+import { generateSubjectAndBody } from "../templateEngine/generateSubjectAndBody";
 
 export async function handleChaserEmail(
   documents: admin.firestore.QuerySnapshot<
@@ -20,7 +19,7 @@ export async function handleChaserEmail(
   const documentsList: admin.firestore.DocumentData[] = [];
 
   await documents.forEach((doc: admin.firestore.DocumentData) =>
-    documentsList.push(doc),
+    documentsList.push(doc)
   );
 
   for (let index = 0; index < documentsList.length; index++) {
@@ -61,9 +60,9 @@ export async function handleChaserEmail(
         setTimeout(
           resolve,
           Number(emailConfig.emailsConfig.timeToWaitBetweenEmails),
-        ),
+        )
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.message);
       // errors.push(error.message);
     }

@@ -1,5 +1,5 @@
-import { TemplateConf } from "../../types.ts";
-import { replacePlaceholders } from "./replacePlaceHolder.ts";
+import { TemplateConf } from "../../types";
+import { replacePlaceholders } from "./replacePlaceHolder";
 
 export function generateSubjectAndBody(
   templateConfig: TemplateConf,

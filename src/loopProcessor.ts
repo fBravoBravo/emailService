@@ -1,4 +1,4 @@
-import { ConfigJSON } from "../types.ts";
+import { ConfigJSON } from "../types";
 import { db } from "../constants.js";
 
 export async function loopProcessor(

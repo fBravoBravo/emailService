@@ -1,3 +1,3 @@
-import { walker } from "../utils/walker.ts";
+import { walker } from "../utils/walker";
 
 walker();
