@@ -14,11 +14,6 @@ export async function retrievingFromFirestoreChaser(
 
     let selectedField = databaseField;
 
-    if (databaseField.includes("$")) {
-      //TODO Logic for replacing dynamically the chasers fields to update.
-      selectedField = databaseField.replace("${}", "");
-    }
-
     const users = collection
       .where(selectedField, "==", "")
       .where(
@@ -42,4 +37,8 @@ export async function retrievingFromFirestoreChaser(
       "Error retrieving from firestore for the chasers: " + error.message,
     );
   }
+}
+
+async function computeinwhichChaserWeAre(emailConfig: ConfigJSON) {
+  const {} = emailConfig;
 }

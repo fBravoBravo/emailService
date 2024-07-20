@@ -23,32 +23,24 @@ export const configJson = z.object({
   emailsConfig: z.object({
     subject: z.string(),
     submittedField: z.string(),
+    "statusField": z.string(),
     timeToWaitBetweenBatches: z.string(),
     timeToWaitBetweenEmails: z.string(),
     firstEmailConfig: z.object({
-      statusField: z.object({
-        statusName: z.string(),
-        statusValue: z.string(),
-      }),
+      statusValue: z.string(),
       template: templateConf,
       sendDate: z.string(),
       databaseField: z.string(),
     }),
     chasersConfig: z.object({
-      statusField: z.object({
-        statusName: z.string(),
-        statusValue: z.string(),
-      }),
+      statusValue: z.string(),
       template: templateConf,
       numberOfChasers: z.string(),
       intervalBetweenChasers: z.string(),
       databaseField: z.string(),
     }),
     finalEmailConfig: z.object({
-      statusField: z.object({
-        statusName: z.string(),
-        statusValue: z.string(),
-      }),
+      statusValue: z.string(),
       template: templateConf,
       daysBeforeDueDate: z.string(),
       databaseField: z.string(),
