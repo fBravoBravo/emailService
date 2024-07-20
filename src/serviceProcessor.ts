@@ -1,8 +1,8 @@
-import { ConfigJSON, configJson } from "../types.ts";
-import { todayDate, todayObject } from "../constants.js";
-import { handleChaserEmail } from "./handlers/chasers.ts";
-import { loopProcessor } from "./loopProcesser.ts";
-import { retrievingFromFirestoreChaser } from "./retrievers/chasersRetriever.ts";
+import { ConfigJSON, configJson } from "../types";
+import { todayDate, todayObject } from "../constants";
+import { handleChaserEmail } from "./handlers/chasers";
+import { loopProcessor } from "./loopProcessor";
+import { retrievingFromFirestoreChaser } from "./retrievers/chasersRetriever";
 
 export async function serviceProcessor(emailConfig: ConfigJSON) {
   console.log(`Starting email Service for ${emailConfig.ServiceName}`);
