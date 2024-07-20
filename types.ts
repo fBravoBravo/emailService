@@ -1,4 +1,4 @@
-import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
+import { z } from "zod";
 
 const templateConf = z.object({
   templatePath: z.string(),
@@ -27,20 +27,20 @@ export const configJson = z.object({
     timeToWaitBetweenBatches: z.string(),
     timeToWaitBetweenEmails: z.string(),
     firstEmailConfig: z.object({
-      statusValue: z.string(),
+      statusValue: z.array(z.string()),
       template: templateConf,
       sendDate: z.string(),
       databaseField: z.string(),
     }),
     chasersConfig: z.object({
-      statusValue: z.string(),
+      statusValue: z.array(z.string()),
       template: templateConf,
       numberOfChasers: z.string(),
       intervalBetweenChasers: z.string(),
       databaseField: z.string(),
     }),
     finalEmailConfig: z.object({
-      statusValue: z.string(),
+      statusValue: z.array(z.string()),
       template: templateConf,
       daysBeforeDueDate: z.string(),
       databaseField: z.string(),

@@ -17,9 +17,9 @@ export async function retrievingFromFirestoreChaser(
     const users = collection
       .where(selectedField, "==", "")
       .where(
-        emailConfig.emailsConfig.chasersConfig.statusField.statusName,
-        "==",
-        emailConfig.emailsConfig.chasersConfig.statusField.statusName,
+        emailConfig.emailsConfig.statusField,
+        "in",
+        emailConfig.emailsConfig.chasersConfig.statusValue,
       )
       .where(emailConfig.emailsConfig.submittedField, "!=", "")
       .limit(emailConfig.databaseConfig.sizeOfPackage);
