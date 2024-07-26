@@ -10,6 +10,4 @@
 
 //TODO Prepare depploy to GCP.
 
-//TODO Convert to an API so new services an be added with a call.
-
 //TODO Prepare a suite of tests for the process.

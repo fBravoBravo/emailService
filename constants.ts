@@ -20,4 +20,5 @@ admin.initializeApp({
     "https://appscript-296515-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
+// Own database
 export const db = admin.firestore();

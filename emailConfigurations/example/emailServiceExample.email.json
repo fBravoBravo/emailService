@@ -6,10 +6,6 @@
   },
   "dayOfFirstCommunication": "22/08/2024",
   "dueDate": "22/09/2024",
-  "databaseConfig": {
-    "databaseName": "FireStore",
-    "collectionName": "collectionName"
-  },
   "emailsConfig": {
     "submittedField": "submittedAt",
     "firstEmailConfig": {

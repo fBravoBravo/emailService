@@ -1,16 +1,16 @@
-import { serviceProcessor } from "../src/serviceProcessor";
-import { opendirSync, readFileSync } from "fs";
+import Fastify from "fastify";
+import { routes } from "./routes/routes";
 
-export async function walker() {
-    for await (
-        const dirEntry of await opendirSync("./emailConfigurations")
-    ) {
-        //TODO change to look for folders instead of files1
-        const jsonConfigFile = await readFileSync(dirEntry.path);
-        const jsonConfigText = new TextDecoder().decode(jsonConfigFile);
-        const jsonConfig = JSON.parse(jsonConfigText);
+export const fastify = Fastify({
+    logger: true,
+});
 
-        serviceProcessor(jsonConfig);
+fastify.register(routes);
+
+// Run the server!
+fastify.listen({ port: 3000 }, function (err, address) {
+    if (err) {
+        fastify.log.error(err);
+        process.exit(1);
     }
-}
-walker();
+});
