@@ -1,14 +1,9 @@
-import admin from "firebase-admin";
 import { sendEmail } from "../../utils/sendEmail";
-import { ConfigJSON } from "../../types";
 import { generateSubjectAndBody } from "../templateEngine/generateSubjectAndBody";
+import { ConfigTemplate, EmailConfig } from "../../types";
 
 export async function handleChaserEmail(
-  documents: admin.firestore.QuerySnapshot<
-    admin.firestore.DocumentData,
-    admin.firestore.DocumentData
-  >,
-  emailConfig: ConfigJSON,
+  emailConfig: ConfigTemplate,
   collection: FirebaseFirestore.CollectionReference<
     FirebaseFirestore.DocumentData,
     FirebaseFirestore.DocumentData
@@ -16,50 +11,54 @@ export async function handleChaserEmail(
 ) {
   console.log("Chaser email handler started.");
 
-  const documentsList: admin.firestore.DocumentData[] = [];
+  const chaserUsers = (await collection.doc("chasers").get())
+    .data() as EmailConfig;
 
-  await documents.forEach((doc: admin.firestore.DocumentData) =>
-    documentsList.push(doc)
-  );
-
-  for (let index = 0; index < documentsList.length; index++) {
-    const clientDocument = documentsList[index];
+  for (let index = 0; index < chaserUsers.length; index++) {
+    const clientDocument = chaserUsers[index];
     try {
-      const data = clientDocument.data() as any;
+      const isTimeForChaser =
+        new Date().toISOString() >= clientDocument.nextChaserDate;
 
-      console.log(
-        `Processing client with account number: ${data.accountNumber}`,
-      );
-      console.log(`Generated dynamic form URL ✅`);
-      const emailInfo = generateSubjectAndBody(
-        emailConfig.emailsConfig.chasersConfig.template,
-        emailConfig.emailsConfig.subject,
-        data,
-      );
+      if (!isTimeForChaser) {
+        console.log(
+          `Client ${clientDocument.recipient} is not due for a chaser email yet.`,
+        );
+        continue;
+      }
+
+      //TODO Fetch templates from somewhere.
+      // const emailInfo = generateSubjectAndBody(
+      //   emailConfig.emailsConfig.chasersConfig.template,
+      //   emailConfig.emailsConfig.subject,
+      //   data,
+      // );
 
       console.log(`Subject and body ready for sending email ✅`);
 
       //Send email
 
-      await sendEmail(data.email, emailInfo.subject, emailInfo.body);
+      //await sendEmail(data.email, emailInfo.subject, emailInfo.body);
 
       const timeStamp = new Date().toISOString();
 
-      data.status = "chaser2";
+      const newStatus = chaserToSend.split("Sent")[0];
+
+      data.status = newStatus;
       data.lastCommunicationDate = timeStamp;
-      data.chaser1Sent = timeStamp;
+      data[chaserToSend] = timeStamp;
 
       await collection.doc(clientDocument.id).update(data);
 
       console.log(`Client data updated in firestore ✅`);
 
       console.log(
-        `Waiting ${emailConfig.emailsConfig.timeToWaitBetweenEmails} second(s) before processing next client`,
+        `Waiting ${emailConfig.delayBetweenEmails} second(s) before processing next client`,
       );
       await new Promise((resolve) =>
         setTimeout(
           resolve,
-          Number(emailConfig.emailsConfig.timeToWaitBetweenEmails),
+          Number(emailConfig.delayBetweenEmails),
         )
       );
     } catch (error: any) {

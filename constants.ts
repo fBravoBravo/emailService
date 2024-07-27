@@ -21,4 +21,5 @@ admin.initializeApp({
 });
 
 // Own database
+
 export const db = admin.firestore();
