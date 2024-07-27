@@ -42,11 +42,11 @@ export async function handleChaserEmail(
 
       const timeStamp = new Date().toISOString();
 
-      const newStatus = chaserToSend.split("Sent")[0];
+      const newStatus = clientDocument.status.split;
 
-      data.status = newStatus;
-      data.lastCommunicationDate = timeStamp;
-      data[chaserToSend] = timeStamp;
+      clientDocument.status = newStatus;
+      clientDocument.lastCommunicationTimeStamp = timeStamp;
+      clientDocument[`Sent`] = timeStamp;
 
       await collection.doc(clientDocument.id).update(data);
 
