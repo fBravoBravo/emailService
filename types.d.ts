@@ -1,4 +1,4 @@
-export type configTemplate = {
+export type ConfigTemplate = {
     ServiceName: string;
     dayOfFirstCommunication: string;
     dueDate: string;
@@ -11,7 +11,7 @@ export type configTemplate = {
     delayBetweenBatches: number;
 };
 
-export type emailConfig = {
+export type EmailConfig = {
     recipient: string;
     status: string;
     submittedAt: string;
