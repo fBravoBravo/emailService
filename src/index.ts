@@ -1,4 +1,4 @@
-import { ConfigTemplate } from "../types";
+import { emailService } from "./emailService/emailService";
 import { db } from "./fireStore/setUpDB";
 
 async function emailServiceCronJob() {
@@ -9,7 +9,7 @@ async function emailServiceCronJob() {
     );
 
     for (const service of services) {
-        configureEmailService(service);
+        emailService(service);
     }
 
     console.log(
