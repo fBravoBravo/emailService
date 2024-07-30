@@ -4,3 +4,5 @@ function testingdb() {
     console.log("testing db");
     console.log(db.databaseId);
 }
+
+testingdb();

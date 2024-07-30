@@ -23,8 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.db = void 0;
 const _firestore = __importStar(require("@google-cloud/firestore"));
-const db = new _firestore.Firestore({
+exports.db = new _firestore.Firestore({
     projectId: "emailservice-430616",
     keyFilename: "./service-account.json",
 });
