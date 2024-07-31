@@ -1,4 +1,5 @@
 import { ConfigTemplate, EmailConfig } from "../../../types";
+import { waitBetweenEmails } from "../../constants";
 import { sendEmail } from "../emailSender/sendEmail";
 import { triggerExternalService } from "../externalServiceTrigger/externalServiceTrigger";
 import { fetchTemplates } from "../templateEngine/fetchTemplate";
@@ -68,7 +69,9 @@ export async function clientHandler(
             );
 
             console.log(`Waiting one second before processing next client`);
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            await new Promise((resolve) =>
+                setTimeout(resolve, waitBetweenEmails)
+            );
         } catch (error: any) {
             console.error(error.message);
             throw new Error(`Error processing client: ${error.message}`);
