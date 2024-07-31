@@ -32,7 +32,10 @@ export async function clientHandler(
             //TODO External call to fetch the information to replace in the template
 
             const templates: { subject: string; body: string } =
-                await fetchTemplates(config.templatesURL);
+                await fetchTemplates(
+                    config.templatesURL,
+                    data.recipientIdentifier,
+                );
 
             console.log(`Subject and body ready for sending email ✅`);
 
