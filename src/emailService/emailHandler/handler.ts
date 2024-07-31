@@ -1,5 +1,6 @@
 import { EmailConfig } from "../../../types";
 import { sendEmail } from "../emailSender/sendEmail";
+import { triggerExternalService } from "../externalServiceTrigger/externalServiceTrigger";
 import { fetchTemplates } from "../templateEngine/fetchTemplate";
 
 export async function clientHandler(
@@ -44,7 +45,13 @@ export async function clientHandler(
 
             await collection.doc(clientDocument.id).update(data);
 
-            console.log(`Client data updated in firestore ✅`);
+            console.log(`Recipient configuration updated in firestore ✅`);
+
+            await triggerExternalService({});
+
+            console.log(
+                `Call external service for processing after email sent ✅`,
+            );
 
             console.log(`Waiting one second before processing next client`);
             await new Promise((resolve) => setTimeout(resolve, 1000));

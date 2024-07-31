@@ -18,7 +18,6 @@ export async function sendEmail(
 
     const mailOptions = {
         // Add from client confirmation here to send it from that  direction.
-        from: "client-confirmation@ebury.com",
         to: recipient,
         cc: "",
         subject,
