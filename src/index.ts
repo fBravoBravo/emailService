@@ -24,7 +24,7 @@ const server = createServer((req, res) => {
     res.end("Email service cron job running");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
