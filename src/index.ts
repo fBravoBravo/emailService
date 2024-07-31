@@ -1,3 +1,4 @@
+import { createServer } from "http";
 import { emailService } from "./emailService/emailService";
 import { db } from "./fireStore/setUpDB";
 
@@ -17,4 +18,14 @@ async function emailServiceCronJob() {
     );
 }
 
-emailServiceCronJob();
+const server = createServer((req, res) => {
+    emailServiceCronJob();
+    res.statusCode = 200;
+    res.end("Email service cron job running");
+});
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
