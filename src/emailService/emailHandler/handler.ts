@@ -44,6 +44,8 @@ export async function clientHandler(
 
             const timeStamp = new Date().toISOString();
 
+            const oldStatus = data.status;
+
             data.status = "chaser2";
             data.lastCommunicationTimeStamp = timeStamp;
 
@@ -51,7 +53,13 @@ export async function clientHandler(
 
             console.log(`Recipient configuration updated in firestore ✅`);
 
-            await triggerExternalService({});
+            await triggerExternalService({
+                emailSentTimeStamp: timeStamp,
+                recipient: data.recipient,
+                recipientIdentifier: data.recipientIdentifier,
+                oldStatus: oldStatus,
+                newStatus: data.status,
+            }, config.processorAfterSendURL);
 
             console.log(
                 `Call external service for processing after email sent ✅`,
