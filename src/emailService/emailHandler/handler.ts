@@ -30,8 +30,6 @@ export async function clientHandler(
 
             console.log(`Generated dynamic form URL ✅`);
 
-            //TODO External call to fetch the information to replace in the template
-
             const templates: { subject: string; body: string } =
                 await fetchTemplates(
                     config.templatesURL,

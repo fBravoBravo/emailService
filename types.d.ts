@@ -16,6 +16,7 @@ export type ConfigTemplate = {
 export type EmailConfig = {
     recipient: string;
     recipientIdentifier: string;
+    timeZone: string;
     status: string;
     submittedAt: string;
     possibleStatus: string[];
