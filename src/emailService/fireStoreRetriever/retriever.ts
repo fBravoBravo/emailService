@@ -7,7 +7,9 @@ export async function firestoreRetriever(
     >,
 ) {
     try {
-        console.log("Retrieving from firestore for the first Chasers");
+        console.log(
+            `Retrieving a package of ${sizeOfPackage} recipients from firestore`,
+        );
 
         const users = collection
             .where("status", "!=", "done")
