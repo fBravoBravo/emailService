@@ -1,5 +1,13 @@
+import { EmailConfig } from "../../../types";
+import { sendEmail } from "../emailSender/sendEmail";
+import { fetchTemplates } from "../templateEngine/fetchTemplate";
+
 export async function clientHandler(
     documents: FirebaseFirestore.QuerySnapshot<
+        FirebaseFirestore.DocumentData,
+        FirebaseFirestore.DocumentData
+    >,
+    collection: FirebaseFirestore.CollectionReference<
         FirebaseFirestore.DocumentData,
         FirebaseFirestore.DocumentData
     >,
@@ -15,56 +23,34 @@ export async function clientHandler(
     for (let index = 0; index < documentsList.length; index++) {
         const clientDocument = documentsList[index];
         try {
-            const data = clientDocument.data() as ClientInfo;
-
-            console.log(
-                `Processing client with account number: ${data.accountNumber}`,
-            );
-
-            const dynamicFormURL = await generateFormURL(
-                data.email,
-                data.accountNumber,
-            );
+            const data = clientDocument.data() as EmailConfig;
 
             console.log(`Generated dynamic form URL ✅`);
 
-            const emailContent = replacePlaceholders(chaserTemplate, {
-                accountName: data.accountName,
-                emailAddress: data.email,
-                dynamicFormURL: dynamicFormURL,
-            });
-            const replacedSubject = replacePlaceholders(subject, {
-                accountName: data.accountName,
-                accountNumber: data.accountNumber,
-            });
+            //TODO External call to fetch the information to replace in the template
+
+            const templates: { subject: string; body: string } =
+                await fetchTemplates();
 
             console.log(`Subject and body ready for sending email ✅`);
 
             //Send email
-            await sendEmail(data.email, replacedSubject, emailContent);
+            await sendEmail(data.recipient, templates.subject, templates.body);
 
             const timeStamp = new Date().toISOString();
 
             data.status = "chaser2";
-            data.lastCommunicationDate = timeStamp;
-            data.chaser1Sent = timeStamp;
+            data.lastCommunicationTimeStamp = timeStamp;
 
-            if (testing === "production") {
-                await collection.doc(clientDocument.id).update(data);
-            }
+            await collection.doc(clientDocument.id).update(data);
 
             console.log(`Client data updated in firestore ✅`);
 
             console.log(`Waiting one second before processing next client`);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-        } catch (error) {
+        } catch (error: any) {
             console.error(error.message);
-            errors.push(error.message);
+            throw new Error(`Error processing client: ${error.message}`);
         }
-    }
-
-    if (errors.length > 0) {
-        console.log("Errors encountered in the chaser handler");
-        throw new Error("Errors encountered in the chaser handler: " + errors);
     }
 }

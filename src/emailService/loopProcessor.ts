@@ -17,6 +17,10 @@ export async function loopProcessor(
             FirebaseFirestore.DocumentData,
             FirebaseFirestore.DocumentData
         >,
+        collection: FirebaseFirestore.CollectionReference<
+            FirebaseFirestore.DocumentData,
+            FirebaseFirestore.DocumentData
+        >,
     ) => void,
     collection: FirebaseFirestore.CollectionReference<
         FirebaseFirestore.DocumentData,
@@ -37,7 +41,7 @@ export async function loopProcessor(
     while (!getUsers.empty) {
         try {
             console.log(`loop began`);
-            await handler(getUsers);
+            await handler(getUsers, collection);
             // wait before processing next package.
             console.log(`Waiting for ${timeToWait} ms`);
             await new Promise((resolve) => setTimeout(resolve, timeToWait));
