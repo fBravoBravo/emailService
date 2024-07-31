@@ -15,6 +15,7 @@ export type EmailConfig = {
     recipient: string;
     status: string;
     submittedAt: string;
+    possibleStatus: string[];
     emailsConfig: {
         startDate: string;
         dueDate: string;
@@ -31,9 +32,4 @@ export type EmailConfig = {
         };
     };
     lastCommunicationTimeStamp: string;
-    firstEmailTimeStamp: string;
-    FinalEmailTimeStamp: string;
-    nextChaser: number;
-    nextChaserDate: string;
-    chaserTimeStamp: string;
 };
