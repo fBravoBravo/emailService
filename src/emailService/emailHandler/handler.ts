@@ -34,6 +34,7 @@ export async function clientHandler(
                 await fetchTemplates(
                     config.templatesURL,
                     data.recipientIdentifier,
+                    data.status,
                 );
 
             console.log(`Subject and body ready for sending email ✅`);
