@@ -1,14 +1,14 @@
-export async function handleChaserEmail(
-    documents: admin.firestore.QuerySnapshot<
-        admin.firestore.DocumentData,
-        admin.firestore.DocumentData
+export async function clientHandler(
+    documents: FirebaseFirestore.QuerySnapshot<
+        FirebaseFirestore.DocumentData,
+        FirebaseFirestore.DocumentData
     >,
 ) {
     console.log("Chaser email handler started.");
 
-    const documentsList: admin.firestore.DocumentData[] = [];
+    const documentsList: FirebaseFirestore.DocumentData[] = [];
 
-    await documents.forEach((doc: admin.firestore.DocumentData) =>
+    await documents.forEach((doc: FirebaseFirestore.DocumentData) =>
         documentsList.push(doc)
     );
 

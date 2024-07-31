@@ -1,6 +1,6 @@
 import { ConfigTemplate } from "../../types";
 import { db } from "../fireStore/setUpDB";
-import { handleChaserEmail } from "./emailHandler/handler";
+import { clientHandler } from "./emailHandler/handler";
 import { firestoreRetriever } from "./fireStoreRetriever/retriever";
 import { loopProcessor } from "./loopProcessor";
 
@@ -18,5 +18,5 @@ export async function emailService(
 
     const today = new Date();
 
-    loopProcessor(firestoreRetriever, handleChaserEmail, service);
+    loopProcessor(firestoreRetriever, clientHandler, service);
 }
