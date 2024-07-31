@@ -18,5 +18,5 @@ export async function emailService(
 
     const today = new Date();
 
-    loopProcessor(firestoreRetriever, clientHandler, service);
+    loopProcessor(firestoreRetriever, clientHandler, service, config);
 }

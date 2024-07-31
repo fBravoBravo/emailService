@@ -1,3 +1,5 @@
+import { config } from "dotenv";
+import { ConfigTemplate } from "../../types";
 import { timeToWait } from "../constants";
 
 export async function loopProcessor(
@@ -21,11 +23,13 @@ export async function loopProcessor(
             FirebaseFirestore.DocumentData,
             FirebaseFirestore.DocumentData
         >,
+        config: ConfigTemplate,
     ) => void,
     collection: FirebaseFirestore.CollectionReference<
         FirebaseFirestore.DocumentData,
         FirebaseFirestore.DocumentData
     >,
+    config: ConfigTemplate,
 ) {
     let getUsers;
 
@@ -41,7 +45,7 @@ export async function loopProcessor(
     while (!getUsers.empty) {
         try {
             console.log(`loop began`);
-            await handler(getUsers, collection);
+            await handler(getUsers, collection, config);
             // wait before processing next package.
             console.log(`Waiting for ${timeToWait} ms`);
             await new Promise((resolve) => setTimeout(resolve, timeToWait));

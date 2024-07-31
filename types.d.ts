@@ -6,6 +6,8 @@ export type ConfigTemplate = {
         secretName: string;
         fromDirection: string;
     };
+    templatesURL: string;
+    processorAfterSendURL: string;
     sizeOfPackage: number;
     delayBetweenEmails: number;
     delayBetweenBatches: number;

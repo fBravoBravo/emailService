@@ -1,7 +1,11 @@
-export async function fetchTemplates() {
+export async function fetchTemplates(url: string) {
     //TODO Fetch templates from an external process and put them in an object.
-    return {
-        subject: "Testing subject",
-        body: "testing body",
+
+    const response = await fetch(url);
+    const templates = await response.json();
+
+    return templates as {
+        subject: string;
+        body: string;
     };
 }

@@ -1,4 +1,4 @@
-import { EmailConfig } from "../../../types";
+import { ConfigTemplate, EmailConfig } from "../../../types";
 import { sendEmail } from "../emailSender/sendEmail";
 import { triggerExternalService } from "../externalServiceTrigger/externalServiceTrigger";
 import { fetchTemplates } from "../templateEngine/fetchTemplate";
@@ -12,6 +12,7 @@ export async function clientHandler(
         FirebaseFirestore.DocumentData,
         FirebaseFirestore.DocumentData
     >,
+    config: ConfigTemplate,
 ) {
     console.log("Chaser email handler started.");
 
@@ -31,7 +32,7 @@ export async function clientHandler(
             //TODO External call to fetch the information to replace in the template
 
             const templates: { subject: string; body: string } =
-                await fetchTemplates();
+                await fetchTemplates(config.templatesURL);
 
             console.log(`Subject and body ready for sending email ✅`);
 
