@@ -8,7 +8,7 @@
     "build": "npx rimraf ./dist && tsc",
     "deploy": "npm run build && gcloud run deploy --source . --region europe-southwest1"
   },
-  "author": "",
+  "author": "Francisco Bravo Bravo (bravofran3@gmail.com)",
   "license": "ISC",
   "description": "",
   "dependencies": {
