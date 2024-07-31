@@ -46,7 +46,9 @@ export async function clientHandler(
 
             const oldStatus = data.status;
 
-            data.status = "chaser2";
+            const statusIndex = data.possibleStatus.indexOf(data.status);
+
+            data.status = data.possibleStatus[statusIndex + 1];
             data.lastCommunicationTimeStamp = timeStamp;
 
             await collection.doc(clientDocument.id).update(data);
